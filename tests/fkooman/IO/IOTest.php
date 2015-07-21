@@ -24,21 +24,24 @@ class IOTest extends PHPUnit_Framework_TestCase
 {
     public function testGetRandom()
     {
+        $io = new IO();
         $length = 16;
-        $this->assertSame(2 * $length, strlen(IO::getRandom($length)));
-        $this->assertSame($length, strlen(IO::getRandom($length, true)));
+        $this->assertSame(2 * $length, strlen($io->getRandom($length)));
+        $this->assertSame($length, strlen($io->getRandom($length, true)));
     }
 
     public function testGetTime()
     {
-        $unixTime = IO::getTime();
+        $io = new IO();
+        $unixTime = $io->getTime();
         $this->assertSame('integer', gettype($unixTime));
         $this->assertGreaterThan(0, $unixTime);
     }
 
     public function testReadFile()
     {
-        $fileContent = IO::readFile(__DIR__.'/data/file.txt');
+        $io = new IO();
+        $fileContent = $io->readFile(__DIR__.'/data/file.txt');
         $this->assertSame('Hello World', $fileContent);
     }
 
@@ -48,12 +51,14 @@ class IOTest extends PHPUnit_Framework_TestCase
      */
     public function testReadMissingFile()
     {
-        $fileContent = IO::readFile(__DIR__.'/data/missing_file.txt');
+        $io = new IO();
+        $fileContent = $io->readFile(__DIR__.'/data/missing_file.txt');
     }
 
     public function testWriteFile()
     {
-        $this->assertNull(IO::writeFile('/dev/null', 'Hello World'));
+        $io = new IO();
+        $this->assertNull($io->writeFile('/dev/null', 'Hello World'));
     }
 
     /**
@@ -62,6 +67,7 @@ class IOTest extends PHPUnit_Framework_TestCase
      */
     public function testWriteNotAllowedFile()
     {
-        IO::writeFile('/tmp/tmp/tmp/tmp', 'Hello World');
+        $io = new IO();
+        $io->writeFile('/tmp/tmp/tmp/tmp', 'Hello World');
     }
 }

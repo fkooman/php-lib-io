@@ -27,7 +27,7 @@ class IO
      *
      * @return int the current time as a unix timestamp
      */
-    public static function getTime()
+    public function getTime()
     {
         return time();
     }
@@ -40,7 +40,7 @@ class IO
      *
      * @return string the random string of specified length
      */
-    public static function getRandom($byteLength = 16, $rawBytes = false)
+    public function getRandom($byteLength = 16, $rawBytes = false)
     {
         $strong = false;
         $randomBytes = openssl_random_pseudo_bytes($byteLength, $strong);
@@ -64,7 +64,7 @@ class IO
      *
      * @throws RuntimeException if the file could not be read
      */
-    public static function readFile($filePath)
+    public function readFile($filePath)
     {
         if (false === $fileContent = @file_get_contents($filePath)) {
             throw new RuntimeException(
@@ -83,7 +83,7 @@ class IO
      *
      * @throws RuntimeException if the file could not be written
      */
-    public static function writeFile($filePath, $fileContent)
+    public function writeFile($filePath, $fileContent)
     {
         if (false === @file_put_contents($filePath, $fileContent)) {
             throw new RuntimeException(
