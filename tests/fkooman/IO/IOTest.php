@@ -24,8 +24,9 @@ class IOTest extends PHPUnit_Framework_TestCase
 {
     public function testGetRandom()
     {
-        $randomStr = IO::getRandom(16);
-        $this->assertSame(16, strlen($randomStr));
+        $length = 16;
+        $this->assertSame(2 * $length, strlen(IO::getRandom($length)));
+        $this->assertSame($length, strlen(IO::getRandom($length, true)));
     }
 
     public function testGetTime()

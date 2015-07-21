@@ -35,11 +35,12 @@ class IO
     /**
      * Get a random byte string.
      *
-     * @param int $byteLength the length of the random string in bytes
+     * @param int  $byteLength the length of the random string in bytes
+     * @param bool $rawBytes   return the random string hex encoded
      *
      * @return string the random string of specified length
      */
-    public static function getRandom($byteLength = 16)
+    public static function getRandom($byteLength = 16, $rawBytes = false)
     {
         $strong = false;
         $randomBytes = openssl_random_pseudo_bytes($byteLength, $strong);
@@ -47,7 +48,11 @@ class IO
             throw new RuntimeException('unable to generate secure random number');
         }
 
-        return $randomBytes;
+        if ($rawBytes) {
+            return $randomBytes;
+        }
+
+        return bin2hex($randomBytes);
     }
 
     /**

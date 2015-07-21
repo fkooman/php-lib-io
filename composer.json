@@ -13,5 +13,10 @@
     "description": "Simple IO library",
     "license": "Apache-2.0",
     "name": "fkooman/io",
-    "require": {}
+    "require": {
+        "ext-date": "*",
+        "ext-openssl": "*",
+        "ext-spl": "*",
+        "php": ">= 5.3.3"
+    }
 }
