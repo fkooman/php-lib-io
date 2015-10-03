@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 namespace fkooman\IO;
 
 use RuntimeException;
@@ -36,16 +35,23 @@ class IO
      * Get a random byte string.
      *
      * @param int  $byteLength the length of the random string in bytes
-     * @param bool $rawBytes   return the random string hex encoded
+     * @param bool $rawBytes   return the raw random string if true or hex
+     *                         encoded when false (default)
      *
      * @return string the random string of specified length
      */
     public function getRandom($byteLength = 16, $rawBytes = false)
     {
-        $strong = false;
-        $randomBytes = openssl_random_pseudo_bytes($byteLength, $strong);
-        if (false === $strong) {
-            throw new RuntimeException('unable to generate secure random number');
+        if (function_exists('random_bytes')) {
+            // use PHP 7 random_bytes (@see https://secure.php.net/random_bytes)
+            $randomBytes = random_bytes($byteLength);
+        } else {
+            // use OpenSSL
+            $strong = false;
+            $randomBytes = openssl_random_pseudo_bytes($byteLength, $strong);
+            if (false === $strong) {
+                throw new RuntimeException('unable to generate secure random number');
+            }
         }
 
         if ($rawBytes) {
