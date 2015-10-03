@@ -1,6 +1,6 @@
 # Release History
 
-## 1.0.1 (...)
+## 1.0.1 (2015-10-03)
 - use `random_bytes` if available (PHP >= 7)
 
 ## 1.0.0 (2015-07-21)
