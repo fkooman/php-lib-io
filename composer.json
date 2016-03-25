@@ -15,8 +15,8 @@
     "name": "fkooman/io",
     "require": {
         "ext-date": "*",
-        "ext-openssl": "*",
         "ext-spl": "*",
+        "paragonie/random_compat": "^1.0",
         "php": ">= 5.3.3"
     }
 }
