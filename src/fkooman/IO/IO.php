@@ -73,6 +73,46 @@ class IO
     }
 
     /**
+     * Read a folder and return a list of files in that folder.
+     *
+     * @param string $folderPath the path to the folder
+     * @param string $fileFilter the filter to apply, defaults to '*'
+     * @param bool   $fullPath   return the full path to the file instead of just
+     *                           the basename
+     *
+     * @return array an array of files and directories in the folder requested,
+     *               entries ending in a '/' are folders. If a directory does not exist, is
+     *               empty or no there is no permission to read it an empty folder is returned.
+     */
+    public function readFolder($folderPath, $fileFilter = '*', $fullPath = false)
+    {
+        // make sure folderPath ends with '/'
+        if ('/' !== substr($folderPath, -1)) {
+            $folderPath .= '/';
+        }
+        $searchPattern = $folderPath.$fileFilter;
+        $fileList = @glob($searchPattern, GLOB_MARK | GLOB_ERR);
+        if (false === $fileList) {
+            return [];
+        }
+
+        $arrayFileList = [];
+        foreach ($fileList as $fileName) {
+            if (!$fullPath) {
+                if ('/' === substr($fileName, -1)) {
+                    // is a directory
+                    $fileName = basename($fileName).'/';
+                } else {
+                    $fileName = basename($fileName);
+                }
+            }
+            $arrayFileList[] = $fileName;
+        }
+
+        return $arrayFileList;
+    }
+
+    /**
      * Write a file to the file system.
      *
      * @param string $filePath    the path of the file to write

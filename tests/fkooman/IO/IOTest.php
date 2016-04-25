@@ -55,6 +55,90 @@ class IOTest extends PHPUnit_Framework_TestCase
         $fileContent = $io->readFile(__DIR__.'/data/missing_file.txt');
     }
 
+    public function testReadFolder()
+    {
+        $io = new IO();
+        $folderPath = __DIR__.'/data/';
+        $fileList = $io->readFolder($folderPath, '*', false);
+        $this->assertSame(
+            [
+                'bar',
+                'baz',
+                'directory/',
+                'file.txt',
+                'foo',
+            ],
+            $fileList
+        );
+    }
+
+    public function testReadFolderFullPath()
+    {
+        $io = new IO();
+        $folderPath = __DIR__.'/data/';
+        $fileList = $io->readFolder($folderPath, '*', true);
+        $this->assertSame(
+            [
+                $folderPath.'bar',
+                $folderPath.'baz',
+                $folderPath.'directory/',
+                $folderPath.'file.txt',
+                $folderPath.'foo',
+            ],
+            $fileList
+        );
+    }
+
+    public function testReadFolderCustomPattern()
+    {
+        $io = new IO();
+        $folderPath = __DIR__.'/data/';
+        $fileList = $io->readFolder($folderPath, '*.txt', false);
+        $this->assertSame(
+            [
+                'file.txt',
+            ],
+            $fileList
+        );
+    }
+
+    public function testReadFolderCustomPatternNonTrailingSlash()
+    {
+        $io = new IO();
+        $folderPath = __DIR__.'/data';
+        $fileList = $io->readFolder($folderPath, '*.txt', false);
+        $this->assertSame(
+            [
+                'file.txt',
+            ],
+            $fileList
+        );
+    }
+
+    public function testReadNonExistingFolder()
+    {
+        $io = new IO();
+        $folderPath = __DIR__.'/non_existing_data/';
+        $fileList = $io->readFolder($folderPath);
+        $this->assertSame(
+            [
+            ],
+            $fileList
+        );
+    }
+
+    public function testReadRootFolder()
+    {
+        $io = new IO();
+        $folderPath = '/root/';
+        $fileList = $io->readFolder($folderPath);
+        $this->assertSame(
+            [
+            ],
+            $fileList
+        );
+    }
+
     public function testWriteFile()
     {
         $io = new IO();
