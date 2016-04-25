@@ -1,6 +1,6 @@
 # Release History
 
-## 1.1.0 (...)
+## 1.1.0 (2016-04-25)
 - add `readFolder` method to get a list of all files in a folder
 - no longer wrap exception path in `htmlentities`
 - add `isFile` method to determine if a file exists
