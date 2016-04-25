@@ -99,12 +99,7 @@ class IO implements IOInterface
             return [];
         }
 
-        $arrayFileList = [];
-        foreach ($fileList as $fileName) {
-            $arrayFileList[] = $fileName;
-        }
-
-        return $arrayFileList;
+        return $fileList;
     }
 
     /**
