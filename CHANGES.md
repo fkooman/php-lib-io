@@ -4,6 +4,7 @@
 - add `readFolder` method to get a list of all files in a folder
 - no longer wrap exception path in `htmlentities`
 - add `isFile` method to determine if a file exists
+- add IOInterface to allow for easy testable implementations
 
 ## 1.0.2 (2016-03-25)
 - do no longer use openssl functions for getting random data and

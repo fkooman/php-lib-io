@@ -20,7 +20,7 @@ namespace fkooman\IO;
 
 use RuntimeException;
 
-class IO
+class IO implements IOInterface
 {
     /**
      * Get the current time as a unix timestamp.
