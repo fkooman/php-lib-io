@@ -67,24 +67,7 @@ class IOTest extends PHPUnit_Framework_TestCase
     {
         $io = new IO();
         $folderPath = __DIR__.'/data/';
-        $fileList = $io->readFolder($folderPath, '*', false);
-        $this->assertSame(
-            [
-                'bar',
-                'baz',
-                'directory/',
-                'file.txt',
-                'foo',
-            ],
-            $fileList
-        );
-    }
-
-    public function testReadFolderFullPath()
-    {
-        $io = new IO();
-        $folderPath = __DIR__.'/data/';
-        $fileList = $io->readFolder($folderPath, '*', true);
+        $fileList = $io->readFolder($folderPath, '*');
         $this->assertSame(
             [
                 $folderPath.'bar',
@@ -101,10 +84,10 @@ class IOTest extends PHPUnit_Framework_TestCase
     {
         $io = new IO();
         $folderPath = __DIR__.'/data/';
-        $fileList = $io->readFolder($folderPath, '*.txt', false);
+        $fileList = $io->readFolder($folderPath, '*.txt');
         $this->assertSame(
             [
-                'file.txt',
+                $folderPath.'file.txt',
             ],
             $fileList
         );
@@ -113,11 +96,11 @@ class IOTest extends PHPUnit_Framework_TestCase
     public function testReadFolderCustomPatternNonTrailingSlash()
     {
         $io = new IO();
-        $folderPath = __DIR__.'/data';
-        $fileList = $io->readFolder($folderPath, '*.txt', false);
+        $folderPath = __DIR__.'/data/';
+        $fileList = $io->readFolder($folderPath, '*.txt');
         $this->assertSame(
             [
-                'file.txt',
+                $folderPath.'file.txt',
             ],
             $fileList
         );

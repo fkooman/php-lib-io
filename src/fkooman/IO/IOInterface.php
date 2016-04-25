@@ -24,6 +24,6 @@ interface IOInterface
     public function getRandom($byteLength = 16, $rawBytes = false);
     public function isFile($filePath);
     public function readFile($filePath);
-    public function readFolder($folderPath, $fileFilter = '*', $fullPath = false);
+    public function readFolder($folderPath, $fileFilter = '*');
     public function writeFile($filePath, $fileContent);
 }
