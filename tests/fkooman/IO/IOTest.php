@@ -45,6 +45,14 @@ class IOTest extends PHPUnit_Framework_TestCase
         $this->assertSame('Hello World', $fileContent);
     }
 
+    public function testIsFile()
+    {
+        $io = new IO();
+        $this->assertTrue($io->isFile('/etc/passwd'));
+        $this->assertFalse($io->isFile('/'));
+        $this->assertTrue($io->isFile(__DIR__.'/data/file.txt'));
+    }
+
     /**
      * @expectedException RuntimeException
      * @expectedExceptionMessage unable to read file

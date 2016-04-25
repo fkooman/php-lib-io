@@ -52,6 +52,11 @@ class IO
         return bin2hex($randomBytes);
     }
 
+    public function isFile($filePath)
+    {
+        return @file_exists($filePath) && @is_file($filePath);
+    }
+
     /**
      * Read a file from the file system.
      *
@@ -65,7 +70,7 @@ class IO
     {
         if (false === $fileContent = @file_get_contents($filePath)) {
             throw new RuntimeException(
-                sprintf('unable to read file "%s"', htmlentities($filePath, ENT_QUOTES, 'UTF-8'))
+                sprintf('unable to read file "%s"', $filePath)
             );
         }
 
@@ -124,7 +129,7 @@ class IO
     {
         if (false === @file_put_contents($filePath, $fileContent)) {
             throw new RuntimeException(
-                sprintf('unable to write file "%s"', htmlentities($filePath, ENT_QUOTES, 'UTF-8'))
+                sprintf('unable to write file "%s"', $filePath)
             );
         }
     }
