@@ -105,13 +105,24 @@ class IO implements IOInterface
     /**
      * Write a file to the file system.
      *
-     * @param string $filePath    the path of the file to write
-     * @param string $fileContent the content to be written to the file
+     * @param string $filePath        the path of the file to write
+     * @param string $fileContent     the content to be written to the file
+     * @param bool   $createParentDir create the parent directory if it does not exist, defaults to false
+     * @param int    $dirMask         the mask to use for creating the directory, defaults to 0750
      *
      * @throws RuntimeException if the file could not be written
      */
-    public function writeFile($filePath, $fileContent)
+    public function writeFile($filePath, $fileContent, $createParentDir = false, $dirMask = 0750)
     {
+        if ($createParentDir) {
+            $parentDir = dirname($filePath);
+            if (false === @file_exists($parentDir)) {
+                if (false === @mkdir($parentDir, $dirMask, true)) {
+                    throw new RuntimeException(sprintf('unable to create directory "%s"', $parentDir));
+                }
+            }
+        }
+
         if (false === @file_put_contents($filePath, $fileContent)) {
             throw new RuntimeException(
                 sprintf('unable to write file "%s"', $filePath)

@@ -133,4 +133,10 @@ class IOTest extends PHPUnit_Framework_TestCase
         $io = new IO();
         $io->writeFile('/tmp/tmp/tmp/tmp', 'Hello World');
     }
+
+    public function testWriteFileCreateDirectory()
+    {
+        $io = new IO();
+        $io->writeFile(sys_get_temp_dir().'/'.$io->getRandom(16).'/file.txt', 'Hello World!', true);
+    }
 }

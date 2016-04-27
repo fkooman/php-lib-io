@@ -1,5 +1,9 @@
 # Release History
 
+## 1.2.0 (2016-04-27)
+- `writeFile` now has the option to create the parent director(y)(ies) if it 
+  does not exist
+
 ## 1.1.0 (2016-04-25)
 - add `readFolder` method to get a list of all files in a folder
 - no longer wrap exception path in `htmlentities`
