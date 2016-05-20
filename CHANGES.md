@@ -1,5 +1,8 @@
 # Release History
 
+## 2.0.0 (...)
+- update the interface also for new `writeFile`
+
 ## 1.2.0 (2016-04-27)
 - `writeFile` now has the option to create the parent director(y)(ies) if it 
   does not exist
