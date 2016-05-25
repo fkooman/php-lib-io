@@ -26,4 +26,5 @@ interface IOInterface
     public function readFile($filePath);
     public function readFolder($folderPath, $fileFilter = '*');
     public function writeFile($filePath, $fileContent, $createParentDir = false, $dirMask = 0750);
+    public function deleteFile($filePath);
 }

@@ -1,7 +1,8 @@
 # Release History
 
-## 2.0.0 (...)
+## 2.0.0 (2016-05-25)
 - update the interface also for new `writeFile`
+- implement `deleteFile`
 
 ## 1.2.0 (2016-04-27)
 - `writeFile` now has the option to create the parent director(y)(ies) if it 

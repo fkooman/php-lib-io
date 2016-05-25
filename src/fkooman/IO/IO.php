@@ -129,4 +129,20 @@ class IO implements IOInterface
             );
         }
     }
+
+    /**
+     * Delete a file from the file system.
+     *
+     * @param string $filePath the path of the file to delete
+     *
+     * @throws RuntimeException if the file could not be deleted
+     */
+    public function deleteFile($filePath)
+    {
+        if (false === @unlink($filePath)) {
+            throw new RuntimeException(
+                sprintf('unable to delete file "%s"', $filePath)
+            );
+        }
+    }
 }
